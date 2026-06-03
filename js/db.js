@@ -378,7 +378,32 @@ const dbService = {
   // In mock mode, this resolves as a compressed base64 string to fit LocalStorage quota
   // In firebase mode, this uploads to storage and resolves the download URL
   async uploadImage(file) {
-    if (window.isFirebaseConfigured && window.firebaseStorage) {
+  if (window.isFirebaseConfigured && window.firebaseStorage) {
+    try {
+      const fileName = `${Date.now()}_${file.name}`;
+      const storageRef = window.firebaseStorage.ref().child(`images/${fileName}`);
+      const snapshot = await storageRef.put(file);
+      const downloadUrl = await snapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (error) {
+      console.error("Error uploading to Firebase Storage:", error);
+      throw error;
+    }
+  } else {
+    // Mock mode: limit size to 5 MB and return base64 string without heavy compression
+    const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+    if (file.size > MAX_SIZE) {
+      return Promise.reject(new Error("File too large for local storage (max 5 MB)."));
+    }
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = e => resolve(e.target.result);
+      reader.onerror = err => reject(err);
+      reader.readAsDataURL(file);
+    });
+  }
+}
+// Legacy uploadImage block removed – cleaned up
       try {
         const fileName = `${Date.now()}_${file.name}`;
         const storageRef = window.firebaseStorage.ref().child(`images/${fileName}`);

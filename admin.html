@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | TechNexus</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <header></header>
+
+  <!-- Container guarded by auth.js -->
+  <main id="admin-portal-container" style="display: none;">
+    <div class="content-wrapper" style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 2rem;">
+        <div>
+          <h1 style="font-family: var(--font-header); font-size: 2rem;">Admin Dashboard</h1>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Manage, publish, and delete portal articles.</p>
+        </div>
+        <button id="logout-admin-btn" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Log Out</button>
+      </div>
+
+      <!-- Create Post Form -->
+      <form id="add-post-form">
+        <h2 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--text-primary);">Create New Post</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;" class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="post-title">Title</label>
+            <input type="text" id="post-title" class="form-control" placeholder="Enter post title" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="post-category">Category</label>
+            <select id="post-category" class="form-control" required>
+              <option value="news">Tech News</option>
+              <option value="repairs">Repair Article</option>
+              <option value="store">Store Item</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Price field (Toggled dynamically by JS) -->
+        <div class="form-group" id="store-price-group" style="display: none;">
+          <label class="form-label" for="post-price">Price Tag</label>
+          <input type="text" id="post-price" class="form-control" placeholder="e.g. $89.99, LKR 12,000">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="post-desc">Description</label>
+          <textarea id="post-desc" class="form-control" rows="8" placeholder="Write full description. You can use spacing and lists." required></textarea>
+        </div>
+
+        <!-- 4-Image upload inputs and previews -->
+        <div class="form-group">
+          <label class="form-label">Images (Upload exactly/up to 4 images for slideshow)</label>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem;" class="image-previews">
+            
+            <!-- Slot 1 -->
+            <div>
+              <div class="image-preview-box" id="preview-box-1">
+                <span class="image-preview-placeholder" id="preview-ph-1">Image 1</span>
+                <img id="preview-img-1" style="display:none;" alt="Preview 1">
+              </div>
+              <input type="file" id="post-img-1" style="display: none;" accept="image/*" required>
+              <label for="post-img-1" class="btn btn-secondary" style="width: 100%; margin-top: 0.5rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;">Browse Slot 1</label>
+            </div>
+
+            <!-- Slot 2 -->
+            <div>
+              <div class="image-preview-box" id="preview-box-2">
+                <span class="image-preview-placeholder" id="preview-ph-2">Image 2</span>
+                <img id="preview-img-2" style="display:none;" alt="Preview 2">
+              </div>
+              <input type="file" id="post-img-2" style="display: none;" accept="image/*">
+              <label for="post-img-2" class="btn btn-secondary" style="width: 100%; margin-top: 0.5rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;">Browse Slot 2</label>
+            </div>
+
+            <!-- Slot 3 -->
+            <div>
+              <div class="image-preview-box" id="preview-box-3">
+                <span class="image-preview-placeholder" id="preview-ph-3">Image 3</span>
+                <img id="preview-img-3" style="display:none;" alt="Preview 3">
+              </div>
+              <input type="file" id="post-img-3" style="display: none;" accept="image/*">
+              <label for="post-img-3" class="btn btn-secondary" style="width: 100%; margin-top: 0.5rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;">Browse Slot 3</label>
+            </div>
+
+            <!-- Slot 4 -->
+            <div>
+              <div class="image-preview-box" id="preview-box-4">
+                <span class="image-preview-placeholder" id="preview-ph-4">Image 4</span>
+                <img id="preview-img-4" style="display:none;" alt="Preview 4">
+              </div>
+              <input type="file" id="post-img-4" style="display: none;" accept="image/*">
+              <label for="post-img-4" class="btn btn-secondary" style="width: 100%; margin-top: 0.5rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;">Browse Slot 4</label>
+            </div>
+
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;" class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="post-link">Resource Link (Optional)</label>
+            <input type="url" id="post-link" class="form-control" placeholder="https://example.com">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="post-download">Download Link (Optional)</label>
+            <input type="url" id="post-download" class="form-control" placeholder="https://drive.google.com/xyz">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 1rem; padding: 0.9rem 2.5rem;">Publish Post</button>
+      </form>
+    </div>
+
+    <!-- Customize Category Display Names Card -->
+    <div class="content-wrapper" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-primary);">Customize Category Display Names</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Rename category labels globally across the website (e.g. navigation headers, post badges, dropdown options).</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        <div class="form-group">
+          <label class="form-label" for="cat-name-news">Tech News Label</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="cat-name-news" class="form-control" placeholder="e.g. Tech News">
+            <button type="button" onclick="handleUpdateCategory('news')" class="btn btn-secondary">Save</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="cat-name-repairs">Repair Articles Label</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="cat-name-repairs" class="form-control" placeholder="e.g. Repair Articles">
+            <button type="button" onclick="handleUpdateCategory('repairs')" class="btn btn-secondary">Save</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="cat-name-store">Store Label</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="cat-name-store" class="form-control" placeholder="e.g. Store">
+            <button type="button" onclick="handleUpdateCategory('store')" class="btn btn-secondary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Configure Navigation Menu Card -->
+    <div class="content-wrapper" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-primary);">Configure Navigation Menu Visibility</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Select which links are displayed in the main header navigation menu. Unchecked pages will remain accessible but hidden from the navigation bar.</p>
+      
+      <form id="menu-config-form" onsubmit="handleSaveMenuConfig(event)">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;" id="menu-checkbox-container">
+          <!-- Populated dynamically via js/admin.js -->
+        </div>
+        <button type="submit" class="btn btn-primary">Save Menu Visibility</button>
+      </form>
+    </div>
+
+    <!-- Site Branding Settings Card -->
+    <div class="content-wrapper" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-primary);">Site Identity & Branding</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Configure the global website title name and upload a custom logo image file.</p>
+      
+      <form id="brand-config-form" onsubmit="handleSaveBranding(event)">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;" class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="brand-site-name">Website Title Name</label>
+            <input type="text" id="brand-site-name" class="form-control" placeholder="e.g. TechNexus" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Branding Logo Image (Optional)</label>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <div class="image-preview-box" id="logo-preview-box" style="width: 120px; height: 50px; flex-shrink: 0;">
+                <span class="image-preview-placeholder" id="logo-preview-ph" style="font-size: 0.75rem;">No Logo</span>
+                <img id="logo-preview-img" style="display:none;" alt="Logo Preview">
+              </div>
+              <div style="flex-grow: 1;">
+                <input type="file" id="brand-logo-file" style="display: none;" accept="image/*">
+                <label for="brand-logo-file" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Choose File</label>
+                <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.25rem;">Transparent PNG recommended.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">Save Site Branding</button>
+      </form>
+    </div>
+
+    <!-- Active List -->
+    <div class="content-wrapper">
+      <h2 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-primary);">Manage Existing Posts</h2>
+      <div style="overflow-x: auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Date Published</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-posts-tbody">
+            <!-- Loaded dynamically via js/admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+  <!-- App Custom Logic -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

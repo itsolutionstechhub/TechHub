@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repair Guides | TechNexus</title>
+  <meta name="description" content="Learn how to repair smartphones, laptops, tablets, and gaming consoles with step-by-step repair guides from TechNexus.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <header></header>
+
+  <main>
+    <div style="margin-bottom: 2rem;">
+      <h1 style="font-family: var(--font-header); font-size: 2.2rem; margin-bottom: 0.5rem;">Repair Articles</h1>
+      <p style="color: var(--text-secondary);">Expert repair guides, software debugging tips, and device teardown walkthroughs.</p>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-container">
+      <svg class="search-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <input type="text" id="search-box" class="search-input" placeholder="Search repair tutorials...">
+    </div>
+
+    <!-- Category Feed Grid -->
+    <div class="posts-grid" id="category-posts-grid">
+      <!-- Cards rendered via js/pages.js -->
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+  <!-- App Custom Logic -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+</html>

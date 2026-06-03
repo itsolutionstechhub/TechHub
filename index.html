@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechNexus | Technology News, Repairs & Online Store</title>
+  <meta name="description" content="Explore TechNexus for premium technology news, detailed step-by-step device repair articles, utility software downloads, and custom mechanical peripherals.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Injected dynamically via js/main.js -->
+  <header></header>
+
+  <main>
+    <section class="hero-section">
+      <h1>Welcome to TechNexus</h1>
+      <p>Your premium portal for cutting-edge technology news, detailed hardware repair articles, and high-performance electronic accessories.</p>
+    </section>
+
+    <!-- Search Section -->
+    <div class="search-container">
+      <svg class="search-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <input type="text" id="search-box" class="search-input" placeholder="Search news, repair guides, or products...">
+    </div>
+
+    <!-- Feed Grid -->
+    <h2 style="font-family: var(--font-header); font-size: 1.8rem; margin-bottom: 1.5rem;">Latest Feed</h2>
+    <div class="posts-grid" id="home-posts-grid">
+      <!-- Cards rendered via js/pages.js -->
+    </div>
+  </main>
+
+  <!-- Injected dynamically via js/main.js -->
+  <footer></footer>
+
+  <!-- Firebase Scripts (Compat v8 version) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+  <!-- App Custom Logic Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+</html>

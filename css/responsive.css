@@ -1,0 +1,108 @@
+/* Responsive adjustments and layout queries */
+
+@media (max-width: 1024px) {
+  .slideshow-container {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navigation adjustments */
+  .mobile-nav-toggle {
+    display: block;
+  }
+  
+  .nav-links {
+    display: none; /* JS will toggle active class */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.25rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 99;
+  }
+  
+  .nav-links.active {
+    display: flex;
+  }
+  
+  .nav-actions {
+    gap: 0.5rem;
+  }
+  
+  /* Footer Columns */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  /* Details and Content wrapper responsive */
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+  
+  .content-header h1 {
+    font-size: 2rem;
+  }
+  
+  /* Slideshow and detail page height */
+  .slideshow-container {
+    height: 280px;
+  }
+  
+  /* Action grid sizes */
+  .action-box {
+    flex-direction: column;
+  }
+  
+  .action-box .btn {
+    width: 100%;
+  }
+  
+  /* Admin controls responsive */
+  .image-previews {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .admin-table th:nth-child(3), 
+  .admin-table td:nth-child(3) {
+    display: none; /* Hide date or category columns for small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-section p {
+    font-size: 1rem;
+  }
+  
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .slideshow-container {
+    height: 200px;
+  }
+  
+  .image-previews {
+    grid-template-columns: 1fr;
+  }
+  
+  .admin-table th:nth-child(2), 
+  .admin-table td:nth-child(2) {
+    display: none; /* Hide category, leaves title and actions on ultra-small screens */
+  }
+}
